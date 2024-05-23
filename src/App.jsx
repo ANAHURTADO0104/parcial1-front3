@@ -5,11 +5,70 @@ import "./App.css";
 import Card from "./components/Card";
 
 function App() {
+  const [mostrarCard, setMostrarCard] = useState(false);
+  const [mostrarError, setMostrarError] = useState(false);
+  const [libro, setLibro] = useState({
+    nombre: "",
+    autor: "",
+    resena: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setMostrarError(false);
+    setMostrarCard(false);
+
+    const regex = /^\s+/g;
+    if (
+      regex.test(libro.nombre) ||
+      libro.nombre.length < 3 ||
+      libro.autor.trim().length < 6
+    ) {
+      setMostrarError(true);
+    } else {
+      setMostrarCard(true);
+    }
+  };
+
   return (
     <div className="App">
-      <h1>Carga de estudiantes</h1>
-      <form></form>
-      <Card />
+      <h1>Libro Favorito</h1>
+      <form onSubmit={handleSubmit}>
+        <label>Libro: </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setMostrarCard(false);
+            setLibro({ ...libro, nombre: e.target.value });
+          }}
+        />
+        <label>Autor: </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setMostrarCard(false);
+            setLibro({ ...libro, autor: e.target.value });
+          }}
+        />
+        <label>Reseña: </label>
+        <input
+          type="text"
+          onChange={(e) => {
+            setMostrarCard(false);
+            setLibro({ ...libro, resena: e.target.value });
+          }}
+        />
+        <button>Enviar</button>
+      </form>
+      {mostrarError && (
+        <h3 style={{ color: "red" }}>
+          Por favor chequea que la información sea correcta
+        </h3>
+      )}
+
+      {mostrarCard && (
+        <Card libro={libro.nombre} autor={libro.autor} resena={libro.resena} />
+      )}
     </div>
   );
 }
