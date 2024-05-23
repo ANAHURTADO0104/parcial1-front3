@@ -34,30 +34,36 @@ function App() {
     <div className="App">
       <h1>Libro Favorito</h1>
       <form onSubmit={handleSubmit}>
-        <label>Libro: </label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setMostrarCard(false);
-            setLibro({ ...libro, nombre: e.target.value });
-          }}
-        />
-        <label>Autor: </label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setMostrarCard(false);
-            setLibro({ ...libro, autor: e.target.value });
-          }}
-        />
-        <label>Reseña: </label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setMostrarCard(false);
-            setLibro({ ...libro, resena: e.target.value });
-          }}
-        />
+        <div>
+          <label>Libro: </label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setMostrarCard(false);
+              setLibro({ ...libro, nombre: e.target.value });
+            }}
+          />
+        </div>
+        <div>
+          <label>Autor: </label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setMostrarCard(false);
+              setLibro({ ...libro, autor: e.target.value });
+            }}
+          />
+        </div>
+        <div>
+          <label>Reseña: </label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setMostrarCard(false);
+              setLibro({ ...libro, resena: e.target.value });
+            }}
+          />
+        </div>
         <button>Enviar</button>
       </form>
       {mostrarError && (
